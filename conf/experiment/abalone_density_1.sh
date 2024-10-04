@@ -1,0 +1,13 @@
+#!/bin/bash
+#SBATCH --job-name=abalone_density
+#SBATCH --partition=small
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=10
+#SBATCH --mem-per-cpu=16000
+#SBATCH --time=60:00:00
+
+# set the number of threads based on --cpus-per-task
+export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
+
+srun python main.py --config-name=abalone_density --multirun exp.seed=1,2,3,4,5,6,7,8,9,10

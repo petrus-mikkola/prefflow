@@ -1,0 +1,41 @@
+####### UNCOMMENT in multi-processing #########
+hydra:
+ sweep: #https://hydra.cc/docs/configure_hydra/workdir/
+   dir: multirun/${now:%Y-%m-%d}/abalone_density
+   subdir: ${exp.seed}
+defaults: #https://hydra.cc/docs/plugins/joblib_launcher/
+ - override hydra/launcher: joblib
+################################################
+device:
+  precision_double: true #use float64 precision
+  device: cpu
+exp:
+  exp_id: ablone_experiment
+  seed: 123
+  target: abalone_density
+  d: 7
+  true_s: 1.0 #Exp(s) noise in RUM
+  lambda_dist: xxx #dist where rankings / comparisons are sampled
+  mixture_success_prob: 999 #when lambda_dist = mixture_uniform_gaussian, this is probability of sampling from Gaussian
+data:
+  k: 5 #the cardinaility of each choice set
+  n: 4177 #the total number of comparisons (when k=2) or rankings (when k>2)
+params:
+  flow: neuralsplineflow #flow architecture (to use non-flow model multivariate gaussian, set 'gaussianmodel')
+  nflows: 6
+  max_iter: 200000
+  batch_size: 8
+  optimizer: adamax #in low D one can consider adam, otherwise adamax
+  lr: 5e-5
+  weight_decay: 1e-6
+modelparams:
+  s: 1.0 #Exp(s) noise in likelihood
+  weightprior: 1.0 #0.0 = MLE, 1.0 = FS-MAP
+plot:
+  showduringtraining: false #works only when run as notebook
+  showdatapoints: false #works only when run as notebook
+  show_iter: 20000000
+  grid_size: 400
+  nsamples: 1000000 #default: 1000000
+  wasserstein_nsamples: 20000 #default: 20000
+  progressbar_show: false

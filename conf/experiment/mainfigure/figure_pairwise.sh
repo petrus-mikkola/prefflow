@@ -1,0 +1,1 @@
+python main.py --config-name=figure_pairwise --multirun modelparams.weightprior=1.0,0.0

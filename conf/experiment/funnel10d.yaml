@@ -1,0 +1,41 @@
+##### UNCOMMENT in multi-processing
+hydra:
+ sweep: #https://hydra.cc/docs/configure_hydra/workdir/
+   dir: multirun/${now:%Y-%m-%d}/funnel10d
+   subdir: ${exp.seed}
+defaults: #https://hydra.cc/docs/plugins/joblib_launcher/
+ - override hydra/launcher: joblib
+#####
+device:
+  precision_double: true
+  device: cpu
+exp:
+  exp_id:
+  seed: 123
+  target: funnel
+  d: 10
+  true_s: 1.0
+  lambda_dist: mixture_uniform_gaussian
+  mixture_success_prob: 0.333
+data:
+  k: 5
+  n: 1000
+params:
+  flow: neuralsplineflow
+  nflows: 6
+  max_iter: 200000
+  batch_size: 8
+  optimizer: adamax
+  lr: 5e-5
+  weight_decay: 1e-6
+modelparams:
+  s: 1.0
+  weightprior: 1.0
+plot:
+  showduringtraining: false
+  showdatapoints: false
+  show_iter: 20000000
+  grid_size: 400
+  nsamples: 1000000
+  wasserstein_nsamples: 20000
+  progressbar_show: false

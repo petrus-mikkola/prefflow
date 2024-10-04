@@ -1,0 +1,1 @@
+python main.py --config-name=figures1b --multirun modelparams.weightprior=0.0

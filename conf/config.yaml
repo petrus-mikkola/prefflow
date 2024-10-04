@@ -1,0 +1,33 @@
+device:
+  precision_double: true #use float64 precision
+  device: cpu
+exp:
+  exp_id:
+  seed: 123
+  target: onemoon
+  d: 2
+  true_s: 1.0 #Exp(s) noise in RUM
+  lambda_dist: mixture_uniform_gaussian #dist where rankings / comparisons are sampled
+  mixture_success_prob: 0.333 #when lambda_dist = mixture_uniform_gaussian, this is probability of sampling from Gaussian
+data:
+  k: 5 #the cardinaility of each choice set
+  n: 100 #the total number of comparisons (when k=2) or rankings (when k>2)
+params:
+  flow: realnvp #flow architexture (to use non-flow model multivariate gaussian, set 'gaussianmodel')
+  nflows: 18
+  max_iter: 20000
+  batch_size: 4
+  optimizer: adam #in low D one can consider adam, otherwise adamax
+  lr: 2e-5
+  weight_decay: 1e-6
+modelparams:
+  s: 1.0 #Exp(s) noise in likelihood
+  weightprior: 1.0 #0.0 = MLE, 1.0 = FS-MAP
+plot:
+  showduringtraining: true #works only when run as notebook
+  showdatapoints: true #works only when run as notebook
+  show_iter: 2500
+  grid_size: 400
+  nsamples: 1000000 #default: 1000000
+  wasserstein_nsamples: 20000 #default: 20000
+  progressbar_show: true
