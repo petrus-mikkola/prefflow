@@ -11,14 +11,14 @@ We show how normalizing flows can be fitted to preferential data representing an
 Publication
 -----------
 Please find the arxiv preprint here:
-https://arxiv.org/abs/xxxx.xxxxx
+https://arxiv.org/html/2410.08710
 
 Preferential Normalizing Flows is accepted in NeurIPS 2024, citation update is coming up...
 ```
 @article{snf,
   title={Preferential Normalizing Flows},
   author={Petrus Mikkola, Luigi Acerbi, Arto Klami},
-  journal = {arxiv:xxxx.xxxxx},
+  journal = {arxiv:2410.08710},
   year = {2024}
 }
 ```
